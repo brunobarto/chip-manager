@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Futuristic Circuit Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../src/styles.css" />
+</head>
+<body>
+  <div class="frame">
+    <div class="frame-inner">
+
+      <!-- Top bar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <div class="logo-chip"></div>
+          <div class="topbar-title">
+            <div class="topbar-title-main">Quantum Circuit Monitor</div>
+            <div class="topbar-title-sub">FPGA / ASIC schematic visualization · Live net analysis</div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="pill">Live link</div>
+          <div class="status-dot"></div>
+          <span>CLK: 312.50 MHz</span>
+        </div>
+      </div>
+
+      <!-- Main schematic area -->
+      <div class="main">
+        <div class="main-header">
+          <div class="main-header-left">
+            <div class="main-header-title">Core topology · Node map</div>
+            <div class="main-header-sub">Die: QCM-7X · Layer: L3 routing · View: Logic + nets</div>
+          </div>
+          <div class="main-header-right">
+            <div class="tag">Auto-route</div>
+            <div class="chip-small">VCC: 1.0 V · Temp: 43°C</div>
+          </div>
+        </div>
+
+        <div class="circuit-wrapper">
+          <canvas id="circuitCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Side panels -->
+      <div class="side">
+
+        <div class="side-panel">
+          <div class="side-header">
+            <div>
+              <div class="side-header-title">Node metrics</div>
+              <div>Critical paths · Timing slack</div>
+            </div>
+            <div class="side-header-badge">Live</div>
+          </div>
+
+          <div class="side-table">
+            <div class="side-table-header">
+              <span>Net</span>
+              <span>Delay</span>
+              <span>Slack</span>
+            </div>
+            <div class="side-table-row">
+              <span>CLK_MAIN</span>
+              <span>0.42 ns</span>
+              <span style="color: var(--success)">+0.18 ns</span>
+            </div>
+            <div class="side-table-row">
+              <span>DATA_BUS[15:0]</span>
+              <span>1.87 ns</span>
+              <span style="color: var(--warning)">+0.03 ns</span>
+            </div>
+            <div class="side-table-row">
+              <span>CTRL_SYNC</span>
+              <span>2.31 ns</span>
+              <span style="color: var(--danger)">-0.12 ns</span>
+            </div>
+            <div class="side-table-row">
+              <span>PLL_LOCK</span>
+              <span>0.73 ns</span>
+              <span style="color: var(--success)">+0.26 ns</span>
+            </div>
+          </div>
+
+          <div class="metric-pill">
+            <div class="metric-dot"></div>
+            <span>Route optimizer: adaptive · pass 3/7</span>
+          </div>
+
+          <div class="side-footer">
+            <span>Utilization: <strong>68.4%</strong> · Power: <strong>4.7 W</strong></span>
+            <div class="mini-bars">
+              <div class="mini-bar"></div>
+              <div class="mini-bar"></div>
+              <div class="mini-bar"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-panel">
+          <div class="side-header">
+            <div>
+              <div class="side-header-title">Config snapshot</div>
+              <div>Revision: QCM-7X-2026.04 · Build 19</div>
+            </div>
+            <div class="side-header-badge">Frozen</div>
+          </div>
+
+          <div class="side-table">
+            <div class="side-table-header">
+              <span>Param</span>
+              <span>Value</span>
+              <span>State</span>
+            </div>
+            <div class="side-table-row">
+              <span>VCORE</span>
+              <span>0.95 V</span>
+              <span>Locked</span>
+            </div>
+            <div class="side-table-row">
+              <span>IO_BANK</span>
+              <span>1.80 V</span>
+              <span>Nominal</span>
+            </div>
+            <div class="side-table-row">
+              <span>CLK_SRC</span>
+              <span>PLL0</span>
+              <span>Stable</span>
+            </div>
+            <div class="side-table-row">
+              <span>THERM_TH</span>
+              <span>85°C</span>
+              <span>Safe</span>
+            </div>
+          </div>
+
+          <div class="metric-pill">
+            <div class="metric-dot" style="background: var(--success);"></div>
+            <span>All rails within ±2% tolerance</span>
+          </div>
+
+          <div class="side-footer">
+            <span>Checksum: <strong>0x9F3A·C7</strong></span>
+            <div class="mini-bars">
+              <div class="mini-bar" style="height: 6px;"></div>
+              <div class="mini-bar" style="height: 10px;"></div>
+              <div class="mini-bar" style="height: 13px;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../src/app.js"></script>
+</body>
+</html>
