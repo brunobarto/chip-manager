@@ -7,7 +7,6 @@ function resizeCanvas() {
   canvas.height = rect.height * window.devicePixelRatio;
   ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
 }
-
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
@@ -40,7 +39,7 @@ function initCircuit() {
     connections.push({
       from: { x: edgeX, y: edgeY },
       to: { x: n.x, y: n.y },
-      phase: Math.random() * Math.PI * 2,
+      phase: Math.random() * Math.PI * 2
     });
 
     if (i % 3 === 0) {
@@ -48,7 +47,7 @@ function initCircuit() {
       connections.push({
         from: { x: n.x, y: n.y },
         to: { x: nodes[j].x, y: nodes[j].y },
-        phase: Math.random() * Math.PI * 2,
+        phase: Math.random() * Math.PI * 2
       });
     }
   });
@@ -64,12 +63,8 @@ function draw() {
   ctx.clearRect(0, 0, rect.width, rect.height);
 
   const bgGrad = ctx.createRadialGradient(
-    rect.width / 2,
-    rect.height / 2,
-    0,
-    rect.width / 2,
-    rect.height / 2,
-    rect.width * 0.7
+    rect.width / 2, rect.height / 2, 0,
+    rect.width / 2, rect.height / 2, rect.width * 0.7
   );
   bgGrad.addColorStop(0, "rgba(10, 40, 80, 0.4)");
   bgGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
@@ -87,19 +82,16 @@ function draw() {
 
     ctx.lineWidth = width;
     ctx.strokeStyle = grad;
-    ctx.beginPath();
 
     const midX = (c.from.x + c.to.x) / 2;
     const midY = (c.from.y + c.to.y) / 2;
-    const normal = {
-      x: -(c.to.y - c.from.y),
-      y: c.to.x - c.from.x,
-    };
+    const normal = { x: -(c.to.y - c.from.y), y: c.to.x - c.from.x };
     const len = Math.hypot(normal.x, normal.y) || 1;
     const offset = 12 * Math.sin(t * 0.02 + idx);
     const ctrlX = midX + (normal.x / len) * offset;
     const ctrlY = midY + (normal.y / len) * offset;
 
+    ctx.beginPath();
     ctx.moveTo(c.from.x, c.from.y);
     ctx.quadraticCurveTo(ctrlX, ctrlY, c.to.x, c.to.y);
     ctx.stroke();
